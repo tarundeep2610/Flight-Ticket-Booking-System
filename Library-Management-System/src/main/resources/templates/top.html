@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<script th:src="@{/JS/script.js}"> </script>
+	<link th:href='@{/CSS/style.css}' rel='stylesheet'>
+	<link th:href='@{/CSS/bootstrap.min.css}' rel='stylesheet'>
+</head>
+<body>
+	<div class="top-bar">
+		<div class="top-container">
+			<h1 class="app-name">Library</h1>
+		</div>
+		<div class="buttons-container">
+            <div class="button">
+                <a href="/booklist">Home</a>
+            </div>
+            <div class="button">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+	</div>
+</body>
+
+</html>
