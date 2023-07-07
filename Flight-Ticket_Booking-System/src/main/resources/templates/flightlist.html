@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="top"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS styling for the flight list page */
+        .flight-list {
+            margin-top: 20px;
+        }
+
+        .flight-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .flight-list th,
+        .flight-list td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .flight-list th {
+            background-color: #f2f2f2;
+        }
+
+        .remove-link {
+            color: #dc3545;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Flight List</h2>
+        <div class="flight-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Flight Number</th>
+                        <th>Departure Airport</th>
+                        <th>Arrival Airport</th>
+                        <th>Departure Date</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Date</th>
+                        <th>Arrival Time</th>
+                        <th>Seats Remaining</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through flights and display them in table rows -->
+                    <tr th:each="flight : ${flist}">
+                        <td th:text="${flight.flightNumber}"></td>
+                        <td th:text="${flight.departureAirport}"></td>
+                        <td th:text="${flight.arrivalAirport}"></td>
+                        <td th:text="${flight.departureDate}"></td>
+                        <td th:text="${flight.departureTime}"></td>
+                        <td th:text="${flight.arrivalDate}"></td>
+                        <td th:text="${flight.arrivalTime}"></td>
+                        <td th:text="${flight.seatCount}"></td>
+                        <td>
+                            <a class="remove-link" th:href="@{remove-flight(fid=${flight.id})}">Remove</a>
+                        </td>
+                    </tr>
+                    <!-- Display a message if no flights are found -->
+                    <tr th:if="${#lists.isEmpty(flist)}">
+                        <td colspan="8">No flights available.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="top"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Flights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link th:href='@{/css/style.css}' rel='stylesheet'>
+    <style>
+        /* Custom CSS styling for the search flight page */
+        .search-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-form input[type="date"],
+        .search-form input[type="time"] {
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .flight-list {
+            margin-top: 20px;
+        }
+
+        .flight-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .flight-list th,
+        .flight-list td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .flight-list th {
+            background-color: #f2f2f2;
+        }
+        .booking-link {
+            color: #dc3545;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Search Flights</h2>
+        <div class="search-form">
+            <form th:action="@{/search-flights}" method="get">
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <div class="flight-list">
+            <h3>Available Flights:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Flight Number</th>
+                        <th>Departure Airport</th>
+                        <th>Arrival Airport</th>
+                        <th>Departure Date</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Date</th>
+                        <th>Arrival Time</th>
+                        <th>Booking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through flights and display them in table rows -->
+                    <tr th:each="flight : ${flights}">
+                        <td th:text="${flight.flightNumber}"></td>
+                        <td th:text="${flight.departureAirport}"></td>
+                        <td th:text="${flight.arrivalAirport}"></td>
+						<td th:text="${flight.departureDate}"></td>
+                        <td th:text="${flight.departureTime}"></td>
+                        <td th:text="${flight.arrivalDate}"></td>
+                        <td th:text="${flight.arrivalTime}"></td>
+                        <td>
+                            <a class="booking-link" th:href="@{book-flight(fid=${flight.flightNumber})}">Book Flight</a>
+                        </td>
+                    </tr>
+                    <!-- Display a message if no flights are found -->
+                    <tr th:if="${#lists.isEmpty(flights)}">
+                        <td colspan="5">No flights available for the selected date and time.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

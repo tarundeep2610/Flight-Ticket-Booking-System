@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="top"></div>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>View Bookings</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+	<link th:href='@{/css/style.css}' rel='stylesheet'>
+</head>
+
+<body>
+	<div class="container">
+		<h2>View Bookings</h2>
+		<!-- Filter Form -->
+		<form class="mb-3" action="#" th:action="@{/booking-list}" method="post">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="flightNumber">Flight Number:</label>
+					<input type="text" class="form-control" id="flightNumber" name="flightnumber"required>
+						</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="departureDate">Departure Date:</label>
+						<input type="date" class="form-control" id="departureDate" name="departureDate">
+					</div>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Filter</button>
+		</form>
+	</div>
+</body>
+
+</html>

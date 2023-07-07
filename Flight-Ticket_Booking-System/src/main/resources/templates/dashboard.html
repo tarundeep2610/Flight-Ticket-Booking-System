@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="top"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking System Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link th:href='@{/css/style.css}' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col" th:if="${role == 'ROLE_USER'}">
+                <h2>User Dashboard</h2>
+                <ul>
+                    <li><a href="/search-flights">Search Flights</a></li>
+                    <li><a href="/my-bookings">My Bookings</a></li>
+                </ul>
+            </div>
+            <div class="col" th:if="${role == 'ROLE_ADMIN'}">
+                <h3 style="margin-bottom: 20px;">Admin Dashboard</h3>
+                <ul>
+                    <li><a href="/add-flight">Add Flight</a></li>
+                    <li><a href="/view-bookings">View Bookings</a></li>
+                    <li><a href="/flight-list">View All Listed Flights</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
